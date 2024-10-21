@@ -48,7 +48,7 @@ To run this project locally, ensure you have the following installed:
 To stop the server, press CTRL+C. This action will also clear the cart automatically to ensure a fresh start for the next session.
 
 ## Project Structure 
-    ```bash
+
     HolidayPlanner/
     │
     ├── app.py                # Main application file
