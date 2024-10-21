@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <title>Booking Cart</title>
+    <style>
+        body {
+            font-family: Montserrat;
+            background-color: #201c24;
+            color: white;
+            padding: 20px;
+        }
+
+        .cart-container {
+            background-color: #2e3440;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #4c566a;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #6a5acd;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background-color: #5a4ab1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart-container">
+        <h1>Your Booking Cart</h1>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+            {% for item in cart %}
+                <div class="cart-item">
+                    <div>{{ item.title }}</div>
+                    <div>${{ item.price }}</div>
+                </div>
+            {% else %}
+                <div class="cart-item">Your cart is empty.</div>
+            {% endfor %}
+        </div>
+        <button class="checkout-btn" onclick="location.href='{{ url_for('checkout') }}'">Proceed to Checkout</button>
+    </div>
+</body>
+</html>

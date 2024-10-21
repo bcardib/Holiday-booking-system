@@ -1,0 +1,204 @@
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+    .header {
+        overflow: hidden;
+        background-color: #6a5acd;
+        margin-top: 20px; 
+        padding: 20px 10px;
+        border-radius: 20px 20px 20px 20px; 
+        grid-area: header;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        background-color: #6a5acd;    
+    }
+
+    .header a {
+        grid-area: header; 
+        float: center;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-family: Montserrat;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 25px;
+        border-radius: 4px;
+        border-bottom: 1px solid #4c566a; 
+    }
+        
+    .logo {
+    font-size: 25px;
+    font-weight: bold;
+    background-color: #6a5acd;
+    }
+    
+    body {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr minmax(200px, 1fr) 1fr;
+        grid-template-areas: 
+            "sidebar-left header sidebar-right"
+            "sidebar-left main sidebar-right";
+        height: 100vh;
+        font-family: Montserrat;
+        background-color: #201c24;
+    }
+
+    .login-section {
+        display: grid; 
+        grid-template-rows: repeat(4, 0.1fr);
+        gap: 10px;
+        background-color: #24283b;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        z-index: 1; 
+        text-align: center;
+        text-color: white;
+    }
+    
+    .sidebar {
+        background-color: #201c24;
+        padding: 20px;
+    }
+    
+    .sidebar-left {
+        grid-area: sidebar-left;
+    }
+    
+    .sidebar-right {
+        grid-area: sidebar-right;
+    }
+
+    .login-btn {
+        border-radius: 5px; 
+        padding: 14px 40px;
+        font-size: 20px;
+        margin-top: 25px;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .login-btn:hover {
+        background-color: #6a5acd;
+        border-color: #6a5acd;
+        color: white;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    input {
+        width: 100%; 
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .item-label {
+        text-align: left;
+        color: white;
+    }
+
+    a:link {
+        color: white;
+    }
+      
+      a:visited {
+        color: white;
+    }
+      
+      a:hover {
+        color: #cbd6ce;
+      }
+      
+      a:active {
+        color: white;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        text-weight: bold;
+      }
+
+      .incorrect-password-match {
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+        animation: blinker 3s linear 1;
+    }
+
+    @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+</style>
+
+<header class="header">
+    <div class="logo">HolidayPlanner <span class="material-symbols-outlined"> travel_explore </span> </a>
+</header> 
+
+
+<aside class="sidebar sidebar-left">
+</aside>
+
+<body>
+    <main class = "main">
+        <h1> Log in </h1>
+        <div class = "login-section">
+            <span class="item-label" for="username">Username</span>
+                <input id="username" type="text" required/>
+            <span class="item-label" for="password">Password</span>
+                <input id="password" type="password" required/>
+            <button onclick="login()" class="login-btn">Login</button>
+            <div id = "incorrect-password-match" class="incorrect-password-match"></div>
+            <a href={{ url_for('signup') }}>New User? Sign up here!</a> 
+        </div>
+    </main>
+</body>
+
+<aside class="sidebar sidebar-right">
+</aside>
+
+<script>
+
+    function login() {
+
+        let username = $("#username").val();
+        let password = $("#password").val();
+
+        if (username == '' || password ==  '') {
+            document.getElementById("incorrect-password-match").innerHTML = "Please enter the required information.";
+            return;
+        }
+
+        const url = `/login/user`
+        
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => {
+            return response.json().then(data => {
+                if (!response.ok) {
+                    // Check the message from the response
+                    document.getElementById("incorrect-password-match").innerHTML = data.msg;
+                } else {
+                    // Handle successful login
+                    window.location.href = `{{ url_for('home') }}?username=${encodeURIComponent(username)}`;
+                }
+            });
+        })
+    }
+</script>

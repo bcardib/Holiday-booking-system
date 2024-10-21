@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="your_styles.css"> <!-- Link to your CSS -->
+    <title>Checkout</title>
+    <style>
+        /* Include styles here or in your CSS file */
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 1fr minmax(200px, 1fr) 1fr;
+            grid-template-areas: 
+                "header header header"
+                "main main sidebar";
+            height: 100vh;
+            font-family: Montserrat;
+            background-color: #201c24;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #6a5acd;
+            color: white;
+        }
+        .checkout-section {
+            background-color: #24283b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Checkout</h1>
+    </header>
+    <main class="main">
+        <div class="checkout-section">
+            <h2>Your Order</h2>
+            <div id="order-summary">
+                <!-- Order summary will be populated here using JavaScript -->
+            </div>
+            <h3>Shipping Information</h3>
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="text" id="address" placeholder="Shipping Address" required>
+            <h3>Payment Information</h3>
+            <input type="text" id="card-number" placeholder="Card Number" required>
+            <input type="text" id="expiry-date" placeholder="Expiry Date" required>
+            <button onclick="completePurchase()" class="checkout-btn">Complete Purchase</button>
+            <div id="purchase-message"></div>
+        </div>
+    </main>
+    <script>
+        // Fetch order details and populate the order summary
+        function fetchOrderSummary() {
+            // Mockup: Replace with actual order data
+            const orderDetails = [
+                { title: "Sydney Tour", price: 500 },
+                { title: "Bondi Beach Getaway", price: 250 }
+            ];
+            const orderSummary = document.getElementById('order-summary');
+            orderDetails.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = `${item.title} - $${item.price}`;
+                orderSummary.appendChild(div);
+            });
+        }
+
+        // Call fetchOrderSummary on page load
+        window.onload = fetchOrderSummary;
+
+        // Function to handle purchase completion
+        function completePurchase() {
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const cardNumber = document.getElementById('card-number').value;
+            const expiryDate = document.getElementById('expiry-date').value;
+
+            // Add logic to process payment and show a message
+            document.getElementById('purchase-message').textContent = "Thank you for your purchase, " + name + "!";
+        }
+    </script>
+</body>
+</html>
