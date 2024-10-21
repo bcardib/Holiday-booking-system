@@ -48,17 +48,18 @@ To run this project locally, ensure you have the following installed:
 To stop the server, press CTRL+C. This action will also clear the cart automatically to ensure a fresh start for the next session.
 
 ## Project Structure 
-HolidayPlanner/
-│
-├── app.py                # Main application file
-├── templates/            # HTML templates for the app
-│   ├── home.jinja        # Home page template
-│   ├── booking_cart.jinja# Booking cart page template
-│   ├── checkout.jinja    # Checkout page template
-│   └── other templates...
-├── static/               # Static files (CSS, JS, images)
-├── requirements.txt      # Project dependencies
-└── README.md             # Project documentation
+    ```bash
+    HolidayPlanner/
+    │
+    ├── app.py                # Main application file
+    ├── templates/            # HTML templates for the app
+    │   ├── home.jinja        # Home page template
+    │   ├── booking_cart.jinja# Booking cart page template
+    │   ├── checkout.jinja    # Checkout page template
+    │   └── other templates...
+    ├── static/               # Static files (CSS, JS, images)
+    ├── requirements.txt      # Project dependencies
+    └── README.md             # Project documentation
 
 
 ## Usage
